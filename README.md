@@ -6,11 +6,23 @@ This repository includes the code for a project on crop classification using the
 
 Given RAM limitations, we downsample the training/ validation set to 28,000, addressing imbalance via OHIT oversampling and data augmentation of minority classes. Linear interpolation and Savitzky-Golay filtering are employed for gap filling and temporal smoothing, respectively. Fourteen additional vegetation indices (VI) are initially computed and added to the feature set, before RobustScaler is applied to the raw spectral bands, given the typically non-Gaussian, heavily skewed nature of Sentinel-2 reflectance data. We evaluate five architectures on a spatially held-out test set of 6,000 samples: U-Net, U-Net with Temporal Attention Gates, InceptionTime, Transformer, and LSTM. Ablation studies involved incorporation of infrequency class weighting, which proved harmful to performance, and sequential forward selection of VIs based on mutual information scores, which revealed MTVI2 as the most predictive VI, with additional VIs affording minimal additional predictive power. 
 
-The LSTM exhibits the highest Average Accuracy (0.63) and Overall Accuracy (0.72), outperforming existing benchmarks on the first metric, despite using a substantially smaller training set. The results for the LSTM are displayed below.
+The LSTM exhibits the highest Average Accuracy (0.63) and Overall Accuracy (0.72), outperforming existing benchmarks on the first metric, despite using a substantially smaller training set:
 
 <div align="center">
 
-### Table 1 — Per-Class Performance Metrics
+| Metric                     | Value  |
+|---------------------------|-------:|
+| Overall Accuracy (OA)     | 0.7188 |
+| Balanced Accuracy         | 0.6285 |
+| Macro F1-Score            | 0.5621 |
+| Macro Jaccard Index (IoU) | 0.4632 |
+
+</div>
+
+The per-class performance and confusion matrix are displayed below.
+
+<div align="center">
+
 
 | Class ID | Class Name         | Support | Precision | Recall | F1-Score |
 |:--------:|--------------------|--------:|----------:|-------:|---------:|
@@ -24,16 +36,11 @@ The LSTM exhibits the highest Average Accuracy (0.63) and Overall Accuracy (0.72
 | 7        | Permanent Meadows  | 1169    | 0.5191    | 0.5586 | 0.5381   |
 | 8        | Temporary Meadows  | 1894    | 0.7246    | 0.4931 | 0.5869   |
 
-### Table 2 — Overall Model Performance
-
-| Metric                     | Value  |
-|---------------------------|-------:|
-| Overall Accuracy (OA)     | 0.7188 |
-| Balanced Accuracy         | 0.6285 |
-| Macro F1-Score            | 0.5621 |
-| Macro Jaccard Index (IoU) | 0.4632 |
-
 </div>
+
+<p align="center">
+  <img src="images/LTSMconfusionmatrix.png" alt="Alt text" width="500"/>
+</p>
 
 ### Code and Data
 
