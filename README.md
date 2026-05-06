@@ -1,6 +1,36 @@
 # BreizhCrops Crop Classification
 
-This 
+This repository includes the code and writeup for a project on crop classification using the BreizhCrops dataset, which provides Sentinel-2 time-series for field polygons in France alongside crop type labels.[1] 
+
+### Summary of Workflow
+
+Given RAM limitations, we downsample the training/ validation set to 28,000, addressing imbalance via OHIT oversampling and data augmentation of minority classes. Linear interpolation and Savitzky-Golay filtering are employed for gap filling and temporal smoothing, respectively. Fourteen additional vegetation indices (VI) are initially computed and added to the feature set, before RobustScaler is applied to the raw spectral bands, given the typically non-Gaussian, heavily skewed nature of Sentinel-2 reflectance data. We evaluate five architectures on a spatially held-out test set of 6,000 samples: U-Net, U-Net with Temporal Attention Gates, InceptionTime, Transformer, and LSTM. Ablation studies involved incorporation of infrequency class weighting, which proved harmful to performance, and sequential forward selection of VIs based on mutual information scores, which revealed MTVI2 as the most predictive VI, with additional VIs affording minimal additional predictive power. 
+
+The LSTM exhibits the highest Average Accuracy (0.63) and Overall Accuracy (0.72), outperforming existing benchmarks on the first metric, despite using a substantially smaller training set. The results for the LSTM are displayed below.
+
+### Table 1 — Per-Class Performance Metrics
+
+| Class ID | Class Name         | Support | Precision | Recall | F1-Score |
+|:--------:|--------------------|--------:|----------:|-------:|---------:|
+| 0        | Barley             | 257     | 0.6474    | 0.9144 | 0.7581   |
+| 1        | Wheat              | 978     | 0.9543    | 0.8967 | 0.9246   |
+| 2        | Rapeseed           | 128     | 0.7427    | 0.9922 | 0.8495   |
+| 3        | Corn               | 1510    | 0.9498    | 0.9649 | 0.9573   |
+| 4        | Sunflower          | 10      | 1.0000    | 0.2000 | 0.3333   |
+| 5        | Orchards           | 44      | 0.0610    | 0.6364 | 0.1113   |
+| 6        | Nuts               | 10      | 0.0000    | 0.0000 | 0.0000   |
+| 7        | Permanent Meadows  | 1169    | 0.5191    | 0.5586 | 0.5381   |
+| 8        | Temporary Meadows  | 1894    | 0.7246    | 0.4931 | 0.5869   |
+
+### Table 2 — Overall Model Performance
+
+| Metric                     | Value  |
+|---------------------------|-------:|
+| Overall Accuracy (OA)     | 0.7188 |
+| Balanced Accuracy         | 0.6285 |
+| Macro F1-Score            | 0.5621 |
+| Macro Jaccard Index (IoU) | 0.4632 |
+
 
 
 ### Code and Data
