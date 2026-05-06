@@ -6,6 +6,8 @@ This repository includes the code for a project on crop classification using the
 
 Given RAM limitations, we downsample the training/ validation set to 28,000, addressing imbalance via OHIT oversampling and data augmentation of minority classes. Linear interpolation and Savitzky-Golay filtering are employed for gap filling and temporal smoothing, respectively. Fourteen additional vegetation indices (VI) are initially computed and added to the feature set, before RobustScaler is applied to the raw spectral bands, given the typically non-Gaussian, heavily skewed nature of Sentinel-2 reflectance data. We evaluate five architectures on a spatially held-out test set of 6,000 samples: U-Net, U-Net with Temporal Attention Gates, InceptionTime, Transformer, and LSTM. Ablation studies involved incorporation of infrequency class weighting, which proved harmful to performance, and sequential forward selection of VIs based on mutual information scores, which revealed MTVI2 as the most predictive VI, with additional VIs affording minimal additional predictive power. 
 
+### Summary of Results
+
 The LSTM exhibits the highest Average Accuracy (0.63) and Overall Accuracy (0.72), outperforming existing benchmarks on the first metric [1], despite using a substantially smaller training set:
 
 <div align="center">
