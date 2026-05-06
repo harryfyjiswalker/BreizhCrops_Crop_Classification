@@ -1,6 +1,6 @@
 # BreizhCrops Crop Classification
 
-
+This 
 
 
 ### Code and Data
@@ -33,12 +33,6 @@ The remainder of the .ipynb file will now be reproducible.
 ________________
 
 Code documenting my reproduction of the initial baseline is available at [COMP0173_Baseline_Replication](COMP0173_Baseline_Replication.ipynb); instructions for replication of this code is included in the .ipynb file.
-
-________________
-
-The poster summary of this coursework is available for download at [COMP0173 Final Coursework 2 Poster.pptx](https://github.com/harryfyjiswalker/COMP0173_CW2_Crop_Classification/blob/main/COMP0173%20Final%20Coursework%202%20Poster.pptx).
-
-
 
 
   
